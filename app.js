@@ -14,7 +14,7 @@ var port = process.env.PORT || 8080;
 // Setup RPC connection
 var provider    = new Web3.providers.HttpProvider(process.env.HTTP_PROVIDER);
 
-// Read JSON and attach RPC connection (Provider)
+// Read JSON and attach RPC connection (Provider) from web3
 var MyContract = contract(MyContractJSON);
 MyContract.setProvider(provider);
 
