@@ -40,6 +40,6 @@ app.get("*", function(req, res){
     res.render("notfound");
 });
 
-app.listen(8080, function(){
+app.listen(port, function(){
     console.log("Server started!!");
 });
