@@ -91,7 +91,6 @@ router.post("/upload", upload.single('fileToUpload'), function (req, res, next) 
                         }).then(function(result){
                                 
                                 console.log(fileName+" encrypted and uploaded to IPFS");
-                                res.render("dashboard", {to_account: to_account, fileName: fileName, hash: hash, pubKeyFile: pubKeyFile, iv: iv, name: result, account: account});
 
                                 //Delete local file from server
                                 fs.unlink(req.file.path, function(err){
@@ -101,6 +100,8 @@ router.post("/upload", upload.single('fileToUpload'), function (req, res, next) 
                                   }
                                     console.log("local file deleted");
                                 });
+
+                                res.render("dashboard", {to_account: to_account, fileName: fileName, hash: hash, pubKeyFile: pubKeyFile, iv: iv, name: result, account: account});                                
                                 
                         }).catch(function(error) {
                             console.log(error);
