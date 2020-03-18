@@ -29,7 +29,7 @@
 					<td><%= transactions[i].to_id %></td>
 					<td><%= transactions[i].name %></td>
 					<td><%= transactions[i].hash %></td>
-					<td><%= moment.unix(transactions[i].timestamp).format("MMM-DD-YYYY HH:mm:ss") %></td>
+					<td><%= moment.unix(transactions[i].timestamp).fromNow(); %> (<%= moment.unix(transactions[i].timestamp).format("MMM-DD-YYYY HH:mm:ss") %> +UTC)</td>
 				</tr>
 		    <% } %>
 		<% } %>
