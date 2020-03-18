@@ -1,0 +1,50 @@
+<script type="text/javascript">
+  	const MyContractJSON = <%- JSON.stringify(locals.myContract) %>;
+  	
+	async function addFile() {
+  		try {
+	      // Get network provider and web3 instance.
+	      const web3 = await getWeb3();
+
+	      // Use web3 to get the user's accounts.
+	      const accounts = await web3.eth.getAccounts();
+
+	      var account = accounts[0];
+	      //var account = <% locals.account %>;
+
+	      // Get the contract instance.
+	      const networkId = await web3.eth.net.getId();
+	      const deployedNetwork = MyContractJSON.networks[networkId];
+
+	      const MyContract = new web3.eth.Contract(MyContractJSON.abi, deployedNetwork.address);
+
+	      MyContract.methods.addFile("<%= locals.to_account %>", "<%= locals.fileName %>", "<%= locals.hash %>", `<%= locals.pubKeyFile %>`, "<%= locals.iv %>").send({from: account
+
+	      }).then(function(receipt) {
+
+			    console.log(receipt);
+			    if(receipt.status == '0x1' || receipt.status == 1){
+			    	console.log("<%= locals.fileName%> added to smart contract");
+			    	alert("<%= locals.fileName%> uploaded successfully!");
+			    }
+
+		  }).catch(function(error) {
+		  	console.log(error.message);
+		  	if(error.message == "MetaMask Tx Signature: User denied transaction signature.") {
+		  		alert("User rejected the transaction!");
+		  		window.location.replace("/dashboard");
+		  	} else {
+		  		alert("<%= locals.fileName%> upload failed!");
+		  		window.location.replace("/dashboard");
+		  	}
+		  });
+
+	    } catch (error) {
+	      // Catch any errors for any of the above operations.
+	      console.error(error);
+	      window.location.replace("/");
+	    }
+  	}
+
+addFile();
+</script>

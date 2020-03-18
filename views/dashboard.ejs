@@ -1,0 +1,27 @@
+<%- include("partials/header"); %>
+<div class="container">
+	<% if(locals.pubKey && locals.privKey) { %>
+		<%- include("transactions/registerUser"); %>
+		<p class="lead text-success"><%= name+".pem" %> - This is the generated Private Key for your account.</p>
+		<p class="lead text-warning">Save this file somewhere safely. You need it to decrypt your reports.</p>
+		<p class="lead text-danger">NOTE: Do not share it with anybody! Once lost, you cannot retrieve it again.</p>
+	<% } %>
+
+	<% if(locals.hash) { %>
+		<%- include("transactions/addFile"); %>
+	<% } %>
+	
+	<div class="text-left">
+		<h4 class="text-left">Hello, <%= name %></h4>
+		<small>Your Account Address : <%= account %></small>
+	</div>
+	<div class="row my-4">
+		<div class="col">
+			<a href="/upload" class="btn btn-lg btn-outline-primary">Upload Report</a>
+		</div>
+		<div class="col">
+			<a href="/files" class="btn btn-lg btn-outline-primary">View Reports</a>
+		</div>
+	</div>
+</div>
+<%- include("partials/footer"); %>

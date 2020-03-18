@@ -1,0 +1,23 @@
+<%- include("partials/header"); %>
+<div class="container">
+	<h4 class="text-center my-4">Upload Report</h4>
+	<form class="form-group" action="/upload" method="POST" enctype="multipart/form-data">
+		<small class="float-right">Accepted File Types: .pdf, .jpeg/.jpg, .png</small>
+		<input type="file" class="form-control-file my-4" name="fileToUpload" id="fileToUpload" accept="application/pdf, image/png, image/jpeg, image/jpg">
+
+		<% if(locals.types && locals.names && locals.addresses) { %>
+			<div class="input-group mb-4">
+			    <label class="input-group-text" for="accounts-list">Select Account for sharing report</label>
+			 	<select class="selectpicker" id="accounts-list" name="selectedAccount" data-show-subtext="true" data-live-search="true">
+			 		<option selected>Choose Account</option>
+				    <% for(var i=0; i < types.length; i++) { %>
+					    <option value="<%= addresses[i] %>" data-subtext="<%= types[i] %>"><%= names[i] %> - <%= addresses[i] %></option>
+				    <% } %>
+			  	</select>
+			</div>
+		<% } %>
+
+		<button class="btn btn-lg btn-outline-primary">Upload Report</button>
+	</form>
+</div>
+<%- include("partials/footer"); %>

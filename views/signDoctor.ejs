@@ -1,0 +1,21 @@
+<%- include("partials/header"); %>
+<div class="container">
+	<h4 class="display-4">BlockEHR</h4>
+	<p class="lead">Please make sure you have Metamask extension installed and connected to your Wallet Account with sufficient Ethers in your browser. If not, please download it from <a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en" target="_blank">here</a> before proceeding.</p>
+	<div class="row py-4">
+		<div class="col d-flex justify-content-center">
+			<form class="form-group" action="/register-doctor" method="POST">
+				<input class="form-control my-4" type="text" name="username" placeholder="Enter your Name" autofocus>
+				<input type="hidden" id="account" name="account">
+				<button class="btn btn-lg btn-outline-primary">Sign-Up</button>
+			</form>
+		</div>
+		<div class="col d-flex justify-content-center">
+			<form class="form-group d-flex align-items-center" action="/login" method="POST">
+				<input type="hidden" id="account1" name="account1">
+				<button class="btn btn-lg btn-outline-primary">Login</button>
+			</form>
+		</div>
+	</div>
+</div>
+<%- include("partials/footer"); %>
