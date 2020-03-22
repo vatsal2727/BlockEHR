@@ -5,7 +5,7 @@ CS-5800 Final Year Blockchain Project supervised by Prof. Dr. R. Wei
 
 ## Description
 Blockchain is a recent technology which maintains a public chain of records which are connected to each other using security algorithms of cryptography. In this project, we proposed and implemented a system which can be used to share patient’s medical file records securely through blockchain and cryptography algorithms like Advanced Encryption Standard (AES) and Rivest, Shamir, Adleman (RSA) were implemented to encrypt and decrypt the records. The figure below depicts the architecture of the proposed system.
-![System Architecture](https://github.com/surhud004/BlockEHR/architecture.png)
+![System Architecture](https://github.com/surhud004/BlockEHR/blob/master/architecture.png)
 
 ## Our Team
 - [Surhud Bhagali](https://github.com/surhud004) : Core Developer
@@ -24,4 +24,4 @@ Blockchain is a recent technology which maintains a public chain of records whic
 - We have our own BlockEHR Explorer!
 
 ## How to Install on Localhost
-Please checkout our GitHub Wiki.
+Please checkout our [GitHub Wiki](https://github.com/surhud004/BlockEHR/wiki).
