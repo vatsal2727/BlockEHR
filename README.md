@@ -24,4 +24,6 @@ Blockchain is a recent technology which maintains a public chain of records whic
 - We have our own BlockEHR Explorer!
 
 ## How to Install on Localhost
-Please checkout our [GitHub Wiki](https://github.com/surhud004/BlockEHR/wiki).
+Please checkout our [GitHub Wiki](https://github.com/surhud004/BlockEHR/wiki#installation-on-localhost).
+
+### NOTE : The smart contract is verified and published on Ropsten TestNet at [this address](https://ropsten.etherscan.io/address/0x24c6b1389592Cf12b0d25b9c746957d4FCf57a21). Copyright © 2020 surhud004.
