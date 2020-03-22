@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>BlockEHR</title>
+	<!-- Logo -->
+	<link rel="icon" type="image/png" href="/assets/logo.png">
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap" rel="stylesheet">
+	<!-- Bootstrap CSS -->
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<!-- Bootstrap Select CSS -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.12/css/bootstrap-select.min.css" rel="stylesheet">
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="/styles.css">
+	<link rel="stylesheet" type="text/css" href="/animation.css">
+	
+	<script src="https://cdn.jsdelivr.net/npm/web3@1.2.6/dist/web3.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+	<script type="text/javascript">
+  		const getWeb3 = () =>
+		  new Promise((resolve, reject) => {
+		    // Wait for loading completion to avoid race conditions with web3 injection timing.
+		    window.addEventListener("load", async () => {
+		      // Modern dapp browsers...
+		      if (window.ethereum) {
+		        const web3 = new Web3(window.ethereum);
+		        try {
+		          // Request account access if needed
+		          await window.ethereum.enable();
+		          // Acccounts now exposed
+		          resolve(web3);
+		        } catch (error) {
+		          reject(error);
+		        }
+		      }
+		      // Legacy dapp browsers...
+		      else if (window.web3) {
+		        // Use Mist/MetaMask's provider.
+		        const web3 = window.web3;
+		        console.log("Injected web3 detected.");
+		        resolve(web3);
+		      }
+		      // Fallback to localhost; use dev console port by default...
+		      else {
+		        const provider = new Web3.providers.HttpProvider(
+		          "http://127.0.0.1:7545"
+		        );
+		        const web3 = new Web3(provider);
+		        alert("Metamask (Browser extension) not found!");
+		        console.log("No web3 instance injected, using Local web3.");
+		        resolve(web3);
+		      }
+		    });
+		  });
+
+	  	async function init() {
+	  		try {
+		      // Get network provider and web3 instance.
+		      const web3 = await getWeb3();
+
+		      // Use web3 to get the user's accounts.
+		      const accounts = await web3.eth.getAccounts();
+
+			  $("#account").val(accounts[0]);
+		      $("#account1").val(accounts[0]);
+			  $("#currentAccount").html(accounts[0]);
+	          console.log("currentUser: "+accounts[0]);
+
+		    } catch (error) {
+		      // Catch any errors for any of the above operations.
+		      console.error(error);
+		    }
+	  	}
+	  	if (window.ethereum) {
+			window.ethereum.on('accountsChanged', function (accounts) {
+				$.ajax({
+						type: 'POST',
+						data: {
+							newaccount: accounts[0]
+						},
+				        dataType: 'html',
+	                    url: '/account-switch',				
+	                    success: function() {
+						    $("#account").val(accounts[0]);
+						    $("#account1").val(accounts[0]);
+						    $("#currentAccount").html(accounts[0]);
+	                        console.log("currentUser: "+accounts[0]);
+	                    }
+	                });
+				window.location.replace("/");
+			});
+		}
+
+		init();
+	</script>
+	</head>
+<body>
+	<nav class="navbar fixed-top navbar-expand-md navbar-dark">
+		<a class="navbar-brand font-weight-bold" href="/">
+			<img id="brandLogo" src="/assets/logo.png" width="50" height="50" class="d-inline-block align-middle" alt="logo">
+			<span class="d-inline-block align-middle">BlockEHR</span>
+		</a>
+		<ul class="nav navbar-nav ml-auto">
+			<small>Current Account : <span id="currentAccount"></span></small>
+		</ul>
+	</nav>

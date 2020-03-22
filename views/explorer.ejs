@@ -1,0 +1,39 @@
+<%- include("partials/header"); %>
+<div class="container mx-0">
+	<h4 class="text-left">BlockEHR Explorer</h4>
+	<form class="form-row align-items-center mx-4" action="/explorer" method="POST">
+		<div class="col">
+			<input class="form-control" type="text" name="account" placeholder="Enter Account Address" autofocus>
+		</div>
+		<div class="col">
+			<button class="btn btn-lg btn-primary">View Transactions</button>
+		</div>
+	</form>
+	<table class="table my-4">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">From</th>
+				<th scope="col">To</th>
+				<th scope="col">File</th>
+				<th scope="col">Hash</th>
+				<th scope="col">Timestamp</th>
+			</tr>
+		</thead>
+		<tbody>
+		<% if(locals.transactions) { %>
+		    <% for(var i=0; i < transactions.length; i++) { %>
+				<tr>
+					<th scope="row"><%= i %></th>
+					<td><%= transactions[i].from_id %></td>
+					<td><%= transactions[i].to_id %></td>
+					<td><%= transactions[i].name %></td>
+					<td><%= transactions[i].hash %></td>
+					<td><%= moment.unix(transactions[i].timestamp).fromNow(); %> (<%= moment.unix(transactions[i].timestamp).format("MMM-DD-YYYY HH:mm:ss") %> +UTC)</td>
+				</tr>
+		    <% } %>
+		<% } %>
+ 		</tbody>
+	</table>
+</div>
+<%- include("partials/footer"); %>

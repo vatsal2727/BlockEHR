@@ -1,0 +1,30 @@
+<%- include("partials/header"); %>
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<h4>Sent Reports</h4>
+			<% if(locals.sentFiles) { %>
+				<% for(var i=0; i < sentFiles.length; i++) { %>
+					<% if(sentFiles[i].name.length > 0) { %>
+						<div class="alert alert-info" role="alert">
+							<%= sentFiles[i].name %> (hash: <%= sentFiles[i].hash %>) was sent to <%= sentFiles[i].to_id %> account <%= moment.unix(sentFiles[i].timestamp).fromNow(); %>.
+						</div>
+					<% } %>
+				<% } %>
+			<% } %>
+		</div>
+		<div class="col">
+			<h4>Received Reports</h4>
+			<% if(locals.receivedFiles) { %>
+				<% for(var i=0; i < receivedFiles.length; i++) { %>
+					<% if(receivedFiles[i].name.length > 0) { %>
+						<div class="alert alert-info" role="alert">
+						  <%= receivedFiles[i].name %> (hash: <%= receivedFiles[i].hash %>) was received from <%= receivedFiles[i].from_id %> account <%= moment.unix(receivedFiles[i].timestamp).fromNow(); %>. <a href="/file/<%= receivedFiles[i].hash %>" class="btn btn-sm btn-outline-info">View File</a>
+						</div>
+					<% } %>
+				<% } %>
+			<% } %>
+		</div>
+	</div>
+</div>
+<%- include("partials/footer"); %>

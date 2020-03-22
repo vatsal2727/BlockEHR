@@ -1,0 +1,53 @@
+body{
+	background-color: white;
+	color: black;
+	font-family: 'Nunito', sans-serif;
+}
+tr {
+	font-size: 0.83rem;
+}
+.navbar {
+	background-color: #51D0DE;
+	color: #BF4AA8;
+}
+.input-group-text {
+	background-color: transparent;
+	color: black;
+}
+.img-logo {
+	width: 200px;
+  	height: auto;
+}
+.display-2, .display-3, .display-4 {
+	font-family: 'Lobster', cursive;
+	color: #BF4AA8;
+}
+.container{
+	margin-top: 6rem;
+	margin-bottom: 6rem;
+	text-align: center;
+}
+.landing {
+	height: 30em;
+}
+.messages {
+	text-align: left;
+}
+.auth-form {
+	width: 50%;
+}
+.form-control-file {
+	width: 50%;
+}
+.jumbotron {
+	background-color: #BF4AA8;
+}
+#sticky-footer {
+	position: relative;
+   	left: 0;
+   	bottom: 0;
+   	width: 100%;
+   	background-color: #BF4AA8;
+   	color: white;
+   	text-align: center;
+}

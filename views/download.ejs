@@ -1,0 +1,18 @@
+<%- include("partials/header"); %>
+<div class="container">
+	<h4 class="text-center my-4">Decrypt Report</h4>
+	<form class="form-group" action="/download" method="POST" enctype="multipart/form-data">
+		<% if(locals.secretKey && locals.fileHash && locals.fileiv && locals.fileName) { %>
+			<textarea id="fileKey" name="fileKey" class="d-none"><%= secretKey %></textarea>
+			<input type="hidden" id="fileHash" name="fileHash" value="<%= fileHash %>">
+			<input type="hidden" id="fileiv" name="fileiv" value="<%= fileiv %>">
+			<input type="hidden" id="fileName" name="fileName" value="<%= fileName %>">
+		<% } %>
+		<small class="float-right">Accepted File Types: .pem</small>
+		<label for="fileToUpload" class="float-left mx-2">Select your private key file : </label>
+		<input type="file" class="form-control-file my-4" name="fileToUpload" id="fileToUpload" accept=".pem">
+
+		<button class="btn btn-lg btn-outline-primary">Download</button>
+	</form>
+</div>
+<%- include("partials/footer"); %>

@@ -1,0 +1,67 @@
+<script type="text/javascript">
+  	const MyContractJSON = <%- JSON.stringify(locals.myContract) %>;
+  	
+	async function register() {
+  		try {
+	      // Get network provider and web3 instance.
+	      const web3 = await getWeb3();
+
+	      // Use web3 to get the user's accounts.
+	      const accounts = await web3.eth.getAccounts();
+
+	      var account = accounts[0];
+	      //var account = <% locals.account %>;
+
+	      // Get the contract instance.
+	      const networkId = await web3.eth.net.getId();
+	      const deployedNetwork = MyContractJSON.networks[networkId];
+
+	      const MyContract = new web3.eth.Contract(MyContractJSON.abi, deployedNetwork.address);
+
+	      MyContract.methods.registerUser("<%= locals.name %>", `<%= locals.pubKey %>`, "<%= locals.userType %>").send({from: account
+
+	      }).then(function(receipt) {
+
+			    console.log(receipt);
+			    if(receipt.status == '0x1' || receipt.status == 1){
+			    	saveFile(`<%= locals.privKey %>`, "<%= locals.name %>.pem");
+			    }
+
+		  }).catch(function(error) {
+		  	console.log(error.message);
+		  	if(error.message == "MetaMask Tx Signature: User denied transaction signature.") {
+		  		alert("User rejected the transaction!");
+		  		window.location.replace("/");
+		  	} else {
+		  		alert("User with this Account Address already registered!");
+		  		window.location.replace("/");
+		  	}
+		  });
+
+	    } catch (error) {
+	      // Catch any errors for any of the above operations.
+	      console.error(error);
+	      window.location.replace("/");
+	    }
+  	}
+
+function saveFile(data, fileName) {
+    //IE11 support
+    if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+        let blob = new Blob([data], {type: "text/plain"});
+        window.navigator.msSaveOrOpenBlob(blob, fileName);
+    } else {// other browsers
+        let file = new File([data], {type: "attachment/text"});
+        let exportUrl = URL.createObjectURL(file);
+        var link = window.document.createElement('a');
+	    link.href = exportUrl;
+	    link.download = fileName;
+	    document.body.appendChild(link);
+	    link.click();
+	    document.body.removeChild(link);
+	    URL.revokeObjectURL(exportUrl);
+    }
+}
+
+register();
+</script>
