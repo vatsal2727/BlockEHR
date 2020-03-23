@@ -10,7 +10,7 @@ Blockchain is a recent technology which maintains a public chain of records whic
 ## Our Team
 - [Surhud Bhagali](https://github.com/surhud004) : Core Developer
 - [Chitra Rajagopal Parameswaran](https://github.com/chitrargpnirmal) : Team Lead
-- [Vatsal Patel](https://github.com/vatsalpatel) : Smart Contract Developer
+- [Vatsal Patel](https://github.com/vatsal2727) : Smart Contract Developer
 - [Akash Soni](https://github.com/AkashSoniADS) : QA Analyst
 
 ## Features
@@ -26,4 +26,4 @@ Blockchain is a recent technology which maintains a public chain of records whic
 ## How to Install on Localhost
 Please checkout our [GitHub Wiki](https://github.com/surhud004/BlockEHR/wiki#installation-on-localhost).
 
-### NOTE : The smart contract is verified and published on Ropsten TestNet at [this address](https://ropsten.etherscan.io/address/0x24c6b1389592Cf12b0d25b9c746957d4FCf57a21). Copyright © 2020 surhud004.
+#### NOTE : The smart contract is verified and published on Ropsten TestNet at [this address](https://ropsten.etherscan.io/address/0x24c6b1389592Cf12b0d25b9c746957d4FCf57a21). Copyright © 2020 Team A.
